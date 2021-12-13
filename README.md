@@ -1,3 +1,5 @@
+Native browser methods intensive usage instead of react.
+
 
 ## Available Scripts
 
