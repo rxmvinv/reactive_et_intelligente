@@ -1,7 +1,7 @@
-let authenticated = null,
+let authenticated = JSON.parse(localStorage.getItem('authenticated')) || null,
     route = window.history.state,
     modal = {type: ''},
-    users = [];
+    users = JSON.parse(localStorage.getItem('users')) || [];
 
 const navigateTo = path => {
   window.history.pushState(null, null, path);
@@ -14,6 +14,8 @@ const navigateTo = path => {
     bubbles: true
   });
 
+  localStorage.setItem('route', JSON.stringify(path));
+
   window.dispatchEvent(routeNav);
 }
 
@@ -25,6 +27,8 @@ const authenticate = data => {
     },
     bubbles: true
   });
+
+  localStorage.setItem('authenticated', JSON.stringify(authenticated));
 
   window.dispatchEvent(authSuc);
 }
@@ -53,6 +57,8 @@ const saveUsers = data => {
     },
     bubbles: true
   });
+
+  localStorage.setItem('users', JSON.stringify(users));
 
   window.dispatchEvent(usersRes);
 }

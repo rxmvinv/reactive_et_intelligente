@@ -7,38 +7,52 @@ const Edit = props => {
     
     console.log(props);
 
-    const [credentials, setCredentials] = useState({
-      name: props?.name,
-      job: props?.job
+    const [error, setError] = useState({
+      name: '',
+      job: ''
     });
-  
+
+    const [credentials, setCredentials] = useState({
+      name: props?.name || '',
+      job: props?.job || ''
+    });
+
+    const [isReleasing, setIsReleasing] = useState('');
+
     const changeField = (field,value) => setCredentials(
       {
         ...credentials,
         [field]: value
       }
     );
-
-    const error = {
-      name: '',
-      job: ''
-    }
   
     const tryToEdit = () => {
-      error.name = (credentials.name.length < 3) ? 
-        'Length must be more than 3 symbols' : '';
-      error.job = (credentials.job.length < 3) ? 
-        'Length must be more than 3 symbols' : '';
+      const errorMessage = 'Length must be more than 3 symbols';
+      setError({
+        ...error,
+        name: (credentials.name.length < 3) ? errorMessage : '',
+        job: (credentials.job.length < 3) ? errorMessage : ''
+      });
 
-      ((error.name.length <= 0) 
-        && (error.job.length <= 0)) && editUser({...credentials, id: props.id});
+      if (
+        (error.name.length <= 0) 
+        && (error.job.length <= 0) &&
+        ((credentials.name.length > 0) && 
+        (credentials.job.length > 0))
+      ) {
+        editUser({...credentials, id: props.id});
+        setCredentials({name: '', job: ''});
+        openModal({type: ''});
+      }
+    }
 
-      setCredentials({name: '', job: ''});
-      openModal({type: ''});
+    const smoothlyClose = () => {
+      setIsReleasing('released');
+      setTimeout(() => openModal({type: ''}), 300);
     }
 
     return (
-      <div className='modal-form edit'>
+      <div className={`modal-form edit ${isReleasing}`}>
         <div className='header'>Edit User</div> 
         <label>
           <span className='label-text'>Name:</span>
@@ -53,7 +67,7 @@ const Edit = props => {
           <span className='error'>{error.name}</span>
         </label>
         <label>
-          <span className='label-text'>Name:</span>
+          <span className='label-text'>Job:</span>
           <input 
             type="text" 
             name="job" 
@@ -66,7 +80,7 @@ const Edit = props => {
         </label>
         <div className='action-buttons'>
           <button onClick={() => tryToEdit()} >Edit</button>
-          <button onClick={() => openModal({type: ''})} >Cancel</button>
+          <button onClick={() => smoothlyClose()} >Cancel</button>
         </div>
       </div>
     )

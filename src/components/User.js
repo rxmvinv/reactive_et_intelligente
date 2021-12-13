@@ -13,8 +13,11 @@ const User = props => {
     !authenticated && navigateTo('/login');
 
     const moveBack = () => {
-      dropUser();
       navigateTo('/users');
+      
+      setTimeout(() => {
+        dropUser();
+      }, 300);
     }
     
     return (

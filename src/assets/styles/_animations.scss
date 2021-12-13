@@ -15,3 +15,57 @@
     bottom: 0%;
   }
 }
+
+@keyframes modal-release {
+  from {
+    bottom: 0%;
+  }
+  to {
+    bottom: -100%;
+  }
+}
+  
+@-webkit-keyframes modal-release {
+  from {
+    bottom: 0%;
+  }
+  to {
+    bottom: -100%;
+  }
+}
+
+@keyframes route-showed {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+  
+@-webkit-keyframes route-showed {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes route-hidden {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+  
+@-webkit-keyframes route-hidden {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

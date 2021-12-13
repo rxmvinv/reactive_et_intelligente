@@ -17,6 +17,8 @@ const Login = () => {
       password: ''
     });
 
+    const [signedState, setSignedState] = useState('');
+
     const changeField = (field,value) => setCredentials(
       {
         ...credentials,
@@ -25,36 +27,29 @@ const Login = () => {
     );
 
     const trySignIn = () => {
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(credentials.email) ?
+      console.log(/\S+@\S+\.\S+/.test(credentials.email), credentials.email);
         setError({
-          ...error,
-          email: '' 
-        }) :
-        setError({
-          ...error,
-          email: 'Email is not valid' 
-        });
-      
-      /^[A-Za-z]\w{7,14}$/.test(credentials.password) ?
-        setError({
-          ...error,
-          password: ''
-        }) : 
-        setError({
-          ...error,
-          password: `Length between 7 and 14 symbols. 
-          Only digits, letters and undersore allowed`
+
+          password: /^[A-Za-z]\w{7,14}$/.test(credentials.password) ? '' : 
+                  `Length between 7 and 14 symbols. 
+                  Only digits, letters and undersore allowed`,
+
+          email: /\S+@\S+\.\S+/.test(credentials.email) ? '' : 'Email is not valid' 
+        
         });
 
-      ((error.email.length <= 0) 
+      if ((error.email.length <= 0) 
         && (error.password.length <= 0) &&
         ((credentials.email.length > 0) && 
         (credentials.password.length > 0))
-      ) && signIn(credentials);
+      ) {
+        setSignedState('default');
+        setTimeout(() => signIn(credentials), 300)
+      }
     }
     
     return (
-      <div className='login-form route'>
+      <div className={`login-form route ${signedState}`}>
         <div className='header'>Sign In</div>
         <label>
           <span className='label-text'>Email:</span>

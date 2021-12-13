@@ -6,15 +6,17 @@ import '../../assets/styles/create.scss'
 const Create = props => {
     console.log(props);
 
-    const error = {
+    const [error, setError] = useState({
       name: '',
       job: ''
-    }
+    });
 
     const [credentials, setCredentials] = useState({
       name: '',
       job: ''
     });
+
+    const [isReleasing, setIsReleasing] = useState('');
   
     const changeField = (field,value) => setCredentials(
       {
@@ -24,20 +26,32 @@ const Create = props => {
     );
   
     const tryToCreate = () => {
-      error.name = (credentials.name.length < 3) ? 
-        'Length must be more than 3 symbols' : '';
-      error.job = (credentials.job.length < 3) ? 
-        'Length must be more than 3 symbols' : '';
+      const errorMessage = 'Length must be more than 3 symbols';
+      setError({
+        ...error,
+        name: (credentials.name.length < 3) ? errorMessage : '',
+        job: (credentials.job.length < 3) ? errorMessage : '' 
+      });
 
-      ((error.name.length <= 0) 
-        && (error.job.length <= 0)) && createUser(credentials);
+      if (
+        (error.name.length <= 0) 
+        && (error.job.length <= 0) &&
+        ((credentials.name.length > 0) && 
+        (credentials.job.length > 0))
+      ) { 
+        createUser(credentials);
+        setCredentials({name: '', job: ''});
+        openModal({type: ''});
+      }
+    }
 
-      setCredentials({name: '', job: ''});
-      openModal({type: ''});
+    const smoothlyClose = () => {
+      setIsReleasing('released');
+      setTimeout(() => openModal({type: ''}), 300);
     }
 
     return (
-      <div className='modal-form create'>
+      <div className={`modal-form create ${isReleasing}`}>
         <div className='header'>Create New User</div>
         <label>
           <span className='label-text'>Name:</span>
@@ -65,7 +79,7 @@ const Create = props => {
         </label>
         <div className='action-buttons'>
           <button onClick={() => tryToCreate()} >Create</button>
-          <button onClick={() => openModal({type: ''})} >Cancel</button>
+          <button onClick={() => smoothlyClose()} >Cancel</button>
         </div>
       </div>
     )

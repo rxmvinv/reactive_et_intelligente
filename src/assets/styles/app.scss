@@ -1,7 +1,9 @@
 #root {
   background-color: #222629;
+  overflow: hidden;
 }
 .route {
   width: 100vw;
   height: 100vh;
+  transition: display 0.2s ease-in-out;
 }

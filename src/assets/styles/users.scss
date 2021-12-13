@@ -4,6 +4,7 @@
   text-align: center;
   .header {
     @include page-header();
+    padding: 20px 0;
   }
   .create-new {
     margin: 20px;
@@ -20,9 +21,35 @@
     flex-direction: column;
     overflow-y: scroll;
     height: 100vh;
+    padding-top: 40px;
     .user-item {
       @include user-item();
     }
+    
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #d9cb9a;
+      border-radius: 2px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #6B6E70;
+      border-radius: 2px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+      background: #474b4f;
+      border-radius: 2px;
+    }
   }
-
+  &.default {
+    @include users-default();
+  }
+  &.forward {
+    opacity: 0;
+    @include users-forward();
+  }
 }

@@ -1,14 +1,33 @@
 @import '_mixins';
 
-.user-route {
-  .back-button {
-    @include highlight-button();
-  }
-  @include user-item();
-  flex-direction: column;
-  justify-content: center;
-  .details {
+.wrapper {
+  .user-route {
+    .back-button {
+      @include highlight-button();
+    }
+    @include user-item();
     flex-direction: column;
     justify-content: center;
+    .details {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .user-avatar {
+        margin-bottom: 20px;
+        width: 175px;
+        height: 175px;
+      }
+      .field {
+        &::after {
+          content: "";
+        }
+      }
+    }
+  }
+  &.default {
+    @include user-default();
+  }
+  &.forward {
+    @include user-forward();
   }
 }

@@ -1,11 +1,32 @@
 @import '_variables';
 @import '_animations';
 
-@mixin dynamic-route {
+@mixin users-default {
+  animation: route-showed forwards 0.2s ease-in-out;
 }
 
-@mixin modal-expanding {
+@mixin users-forward {
+  animation: route-hidden forwards 0.2s ease-in-out;
+}
+
+@mixin user-default {
+  animation: route-hidden forwards 0.2s ease-in-out;
+}
+
+@mixin user-forward {
+  animation: route-showed forwards 0.2s ease-in-out;
+}
+
+@mixin login-default {
+  animation: route-hidden forwards 0.2s ease-in-out;
+}
+
+@mixin modal-expanding() {
   animation: modal-expand forwards 0.2s ease-in-out;
+}
+
+@mixin modal-releasing() {
+  animation: modal-release forwards 0.2s ease-in-out;
 }
 
 @mixin page-header() {
@@ -59,12 +80,23 @@
   align-items: center;
 }
 
-@mixin modal-label-text {
+@mixin modal-label-text() {
   flex-basis: 30%;
   text-align: right;
   font-family: system-ui, sans-serif;
   font-size: 14px;
   color: #d9cb9a;
+}
+
+@mixin error-message() {
+  font-family: system-ui, sans-serif;
+  font-size: 12px;
+  text-transform: lowercase;
+  font-weight: 300;
+  color: #6B6E70;
+  display: flex;
+  flex-basis: 80%;
+  flex-flow: row-reverse;
 }
 
 @mixin user-item() {
@@ -73,12 +105,17 @@
   justify-content: space-around;
   padding: 2% 0;
   align-items: center;
+  max-width: 800px;
+  margin: auto;
   .user-avatar {
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
-    border: 1px solid #fff;
+    border: 1px solid #6B6E70;
     cursor: pointer;
+    &:hover {
+      border: 1px solid #fff;
+    }
   }
   .details {
     display: flex;
@@ -101,18 +138,21 @@
   }
   .action-buttons {
     button {
-      margin-left: 5px;
+      margin-left: 10px;
 
       @include highlight-button();
     }
   }
   &:last-child {
-    margin-bottom: 75px;
+    margin-bottom: 170px;
+  }
+  &:first-child {
+    margin-bottom: auto;
   }
 }
 
 @mixin modal-dialogue() {
-    position: absolute;
+    position: fixed;
     width: 90vw;
     height: 90vh;
     background: #222629;
@@ -143,8 +183,8 @@
       input {
         @include radio-field();
       }
-      span {
-        
+      .error {
+        @include error-message();
       }
     }
     .action-buttons {
@@ -155,6 +195,16 @@
         }
       }
     }
+  &::before {
+    content: "";
+    background-color: rgba(34, 38, 41, 0.7);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
 }
     
 // @mixin subheader() {

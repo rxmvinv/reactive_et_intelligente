@@ -6,4 +6,7 @@
   }
   @include modal-dialogue();
   @include modal-expanding();
+  &.released {
+    @include modal-releasing();
+  }
 }
