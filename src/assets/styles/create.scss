@@ -1,0 +1,9 @@
+@import '_mixins';
+
+.modal-form {
+  .header {
+    @include page-header();
+  }
+  @include modal-dialogue();
+  @include modal-expanding();
+}

@@ -1,0 +1,28 @@
+@import '_mixins';
+
+.users-route {
+  text-align: center;
+  .header {
+    @include page-header();
+  }
+  .create-new {
+    margin: 20px;
+    position: fixed;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: max-content;
+    @include highlight-button();
+  }
+  .users-list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 100vh;
+    .user-item {
+      @include user-item();
+    }
+  }
+
+}

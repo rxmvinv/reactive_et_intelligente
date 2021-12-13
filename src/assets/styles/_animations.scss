@@ -1,0 +1,17 @@
+@keyframes modal-expand {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0%;
+  }
+}
+  
+@-webkit-keyframes modal-expand {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0%;
+  }
+}
