@@ -27,7 +27,7 @@ const Login = () => {
     );
 
     const trySignIn = () => {
-      console.log(/\S+@\S+\.\S+/.test(credentials.email), credentials.email);
+
         setError({
 
           password: /^[A-Za-z]\w{7,14}$/.test(credentials.password) ? '' : 

@@ -4,7 +4,6 @@ import { openModal } from '../../internal/state-management'
 import '../../assets/styles/delete.scss'
 
 const Delete = props => {
-    console.log(props);
 
     const [isReleasing, setIsReleasing] = useState('');
 

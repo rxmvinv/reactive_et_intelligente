@@ -4,7 +4,6 @@ import '../assets/styles/user.scss'
 
 const User = props => {
 
-    console.log(props);
     const {
       selectedUser,
       dropUser

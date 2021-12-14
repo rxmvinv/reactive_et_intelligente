@@ -4,8 +4,6 @@ import { openModal } from '../../internal/state-management'
 import '../../assets/styles/edit.scss'
 
 const Edit = props => {
-    
-    console.log(props);
 
     const [error, setError] = useState({
       name: '',

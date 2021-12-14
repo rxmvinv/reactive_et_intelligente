@@ -4,7 +4,6 @@ import { openModal } from '../../internal/state-management'
 import '../../assets/styles/create.scss'
 
 const Create = props => {
-    console.log(props);
 
     const [error, setError] = useState({
       name: '',
